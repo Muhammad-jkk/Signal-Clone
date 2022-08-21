@@ -28,11 +28,9 @@ const SigninScreen = ({ navigation }) => {
                     const user = userCredential.user;
                     if (user) {
                         LocalStorage.SetData("Login", "login");
-                        navigation.navigate("Home");
                     }
                 })
                 .catch((error) => {
-                    const errorCode = error.code;
                     const errorMessage = error.message;
                     setMessage("Invalid Email or Password");
                     setShowPopup(true);
@@ -45,9 +43,9 @@ const SigninScreen = ({ navigation }) => {
     }
 
 useLayoutEffect(() => {
-  navigation.setOptions({
-    headerLeft:false
-  })
+//   navigation.setOptions({
+//     headerLeft:false
+//   })
 
 }, [navigation])
     return (

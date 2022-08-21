@@ -18,7 +18,7 @@ const Popup = ({ show, onPress, description, title }) => {
                             <Dialog.Title style={[styles.child1Text, { color: colors.secondary }]}>{title}</Dialog.Title>
                         </View>
                         <Dialog.Content style={[styles.child2, { backgroundColor: colors.secondary }]}>
-                            <Paragraph style={[styles.child2Text, { color: colors.teritary }]}>{description}</Paragraph>
+                            <Paragraph style={[styles.child2Text, { color: colors.tertiary }]}>{description}</Paragraph>
                         </Dialog.Content>
                         <Dialog.Actions style={{ alignItems: 'center', width: '100%', justifyContent: 'center' }}>
                             <Button title='Ok' btntextstyle={{ color: colors.secondary }} btnstyle={{ height: 40, backgroundColor: colors.primary, width: '50%' }} onPress={onPress} />

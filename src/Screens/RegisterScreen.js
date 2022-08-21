@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View, KeyboardAvoidingView, Dimensions, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import InputText from '../Components/InputText';
 import Button from '../Components/Button';
 import { auth } from '../../firebase';
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import Popup from '../Components/Popup';
 import { useTheme } from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons';
@@ -11,7 +11,7 @@ import { AntDesign } from '@expo/vector-icons';
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
 
-const RegisterScreen = () => {
+const RegisterScreen = ({navigation}) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -20,13 +20,20 @@ const RegisterScreen = () => {
     const [showPopup, setShowPopup] = useState(false);
     const {colors} = useTheme();
     const Register = () => {
-        if (name != '' && email != '' && password != '' && profileImage != '') {
+        if (name != '' && email != '' && password != '') {
             createUserWithEmailAndPassword(auth, email, password)
                 .then(res => {
-                    res.user.updateProfile({
+                    updateProfile(auth.currentUser, {
                         displayName: name,
-                        photoURL: profileImage || 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png'
-                    })
+                        photoURL: profileImage || 'https://flyclipart.com/thumb2/dragon-ball-z-goku-png-png-image-717428.png'
+                    }).then(() => {
+                        console.log('Profile Updated');
+                        // Profile updated!
+                        // ...
+                      }).catch((error) => {
+                        // An error occurred
+                        console.log('Error');
+                      });                    
                 })
                 .catch(err => console.log(err))
         } else {

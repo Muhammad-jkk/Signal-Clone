@@ -5,7 +5,7 @@ const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
 const InputText = (props) => {
     return (
-        <View style={styles.inputContainerStyle}>
+        <View style={[styles.inputContainerStyle,props.inputContainerStyle]}>
             {props?.icon}
             <TextInput
                 placeholder={props?.placeholder}
